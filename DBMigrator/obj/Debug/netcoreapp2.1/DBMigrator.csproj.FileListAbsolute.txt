@@ -1,0 +1,15 @@
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\Tools\Migrate.exe
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\Tools\Migrate.exe.config
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.dll.config
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.deps.json
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.runtimeconfig.json
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.runtimeconfig.dev.json
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.dll
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\bin\Debug\netcoreapp2.1\DBMigrator.pdb
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.csprojAssemblyReference.cache
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.AssemblyInfoInputs.cache
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.AssemblyInfo.cs
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.csproj.CoreCompileInputs.cache
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.dll
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.pdb
+C:\Users\vijay.oommen\source\repos\DBMigrator\DBMigrator\obj\Debug\netcoreapp2.1\DBMigrator.genruntimeconfig.cache
