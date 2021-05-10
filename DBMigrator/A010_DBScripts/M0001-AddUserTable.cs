@@ -3,7 +3,7 @@ using FluentMigrator.Infrastructure;
 
 namespace DBMigrator._001_Migrations
 {
-    [Migration(1001)]
+    [Migration(1001, TransactionBehavior.None)]
     public class M0001_AddUserTable : Migration
     {
         public override void Down()

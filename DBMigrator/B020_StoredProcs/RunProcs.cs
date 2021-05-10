@@ -1,7 +1,6 @@
 ﻿using FluentMigrator;
 using System;
 using System.Linq;
-using System.IO;
 
 namespace DBMigrator.B020_StoredProcs
 {

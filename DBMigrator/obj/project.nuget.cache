@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M40gUZgYB6fW2bCiYFjDdwI7mm8gPee4jE5GT1UTP07zTG/iXBqvXC0ysyDEIasrXfx+1URET6JgCuHGgSdUBA==",
+  "dgSpecHash": "FRNuTxHJ0oyJb8MnF1383DJkQIlSWo3tCszVGbJWTfGWy6DSDfEPIZi0WeyoVGzo/KkhZjXBmq/PJBV8Y4KnnQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vijay.oommen\\source\\repos\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
+  "projectFilePath": "C:\\Users\\vijay.oommen\\source\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vijay.oommen\\.nuget\\packages\\commandlineparser\\2.8.0\\commandlineparser.2.8.0.nupkg.sha512",
     "C:\\Users\\vijay.oommen\\.nuget\\packages\\fluentmigrator\\3.2.15\\fluentmigrator.3.2.15.nupkg.sha512",

@@ -11,9 +11,11 @@ namespace DBMigrator
 
         static void Main(string[] args)
         {
+            var command = string.Join(' ', args);
+            command = "--list --runMigration";
             parser = new Parser(settings => { settings.EnableDashDash = true; settings.CaseSensitive = false;  settings.AutoHelp = true; });
-            var result = parser.ParseArguments<AppOptions>(args)
-                .WithParsed(RunWithOptions);
+
+            var result = parser.ParseArguments<AppOptions>(command.Split(' ')).WithParsed(RunWithOptions);
 
             result.WithNotParsed(errors =>
                 {
@@ -29,13 +31,22 @@ namespace DBMigrator
                 MigrationRunner.ListMigrations();
             }
 
+            if (options.Preview)
+            {
+                MigrationRunner.Preview();
+            }
+
             if (options.Rollback && options.Version > 0)
             {
                 MigrationRunner.MigrateDown(options.Version);
                 return;
             }
 
-            MigrationRunner.MigrateUp();
+            if (options.RunMigration)
+            {
+                MigrationRunner.MigrateUp(options.Version);
+            }
+            
         }
     }
 }

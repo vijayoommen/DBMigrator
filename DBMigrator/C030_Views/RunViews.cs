@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DBMigrator.C030_Views
 {
-    [Maintenance(MigrationStage.BeforeAll)]
+    [Maintenance(MigrationStage.BeforeAll, TransactionBehavior.None)]
     public class RunViews : Migration
     {
         public override void Down()

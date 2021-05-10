@@ -2746,11 +2746,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vijay.oommen\\source\\repos\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
+      "projectUniqueName": "C:\\Users\\vijay.oommen\\source\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
       "projectName": "DBMigrator",
-      "projectPath": "C:\\Users\\vijay.oommen\\source\\repos\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
+      "projectPath": "C:\\Users\\vijay.oommen\\source\\DBMigrator\\DBMigrator\\DBMigrator.csproj",
       "packagesPath": "C:\\Users\\vijay.oommen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vijay.oommen\\source\\repos\\DBMigrator\\DBMigrator\\obj\\",
+      "outputPath": "C:\\Users\\vijay.oommen\\source\\DBMigrator\\DBMigrator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vijay.oommen\\AppData\\Roaming\\NuGet\\NuGet.Config",
