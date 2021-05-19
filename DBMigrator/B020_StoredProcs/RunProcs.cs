@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace DBMigrator.B020_StoredProcs
 {
-    [Maintenance(MigrationStage.AfterAll, TransactionBehavior.None)]
-    public class RunProcs : Migration
+    [AppMaintenance(MigrationStage.AfterAll)]
+    public class RunProcs : AppMigration
     {
         public override void Down()
         {
@@ -14,9 +14,19 @@ namespace DBMigrator.B020_StoredProcs
 
         public override void Up()
         {
-            var resources = Utilities.FindScripts(this.GetType().Namespace);
-            // check the expcetion list
-            resources.ToList().ForEach(script => Execute.EmbeddedScript(script));
+            var resources = Helper.FindScripts(this.GetType().Namespace);
+            resources.ToList().ForEach(script =>
+            {
+                RunDropStatement(script);
+                Execute.EmbeddedScript(script);
+            });
+        }
+
+        private void RunDropStatement(string script)
+        {
+            var objectName = script.Replace($"{typeof(RunProcs).Namespace}.EmbeddedScripts.", "").ToLower().Replace(".sql", "");
+            var sql = $@"drop proc if exists {objectName}";
+            Execute.Sql(sql);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DBMigrator.D040_Functions
 {
-    [Maintenance(MigrationStage.BeforeAll, TransactionBehavior.None)]
+    [AppMaintenance(MigrationStage.BeforeAll)]
     public class RunFunctions : Migration
     {
         public override void Down()
@@ -14,8 +14,17 @@ namespace DBMigrator.D040_Functions
 
         public override void Up()
         {
-            var resources = Utilities.FindScripts(this.GetType().Namespace);
-            resources.ToList().ForEach(script => Execute.EmbeddedScript(script));
+            var resources = Helper.FindScripts(this.GetType().Namespace);
+            resources.ToList().ForEach(script => {
+                RunDropStatement(script);
+                Execute.EmbeddedScript(script);
+            });
+        }
+        private void RunDropStatement(string script)
+        {
+            var objectName = script.Replace($"{typeof(RunFunctions).Namespace}.EmbeddedScripts.", "").ToLower().Replace(".sql", "");
+            var sql = $@"drop function if exists {objectName}";
+            Execute.Sql(sql);
         }
     }
 }

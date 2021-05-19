@@ -7,16 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="A010_DBScripts\M0003-CreateDemographicsTable.cs" />
+    <Compile Remove="A010_DBScripts\M0004-CreateMetricsTable.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="B020_StoredProcs\EmbeddedFiles\dbo.spListTables.sql" />
     <None Remove="B020_StoredProcs\EmbeddedScripts\dbo.spListColumns.sql" />
-    <None Remove="C030_Views\EmbeddedScripts\vwAllTables.sql" />
-    <None Remove="D040_Functions\EmbeddedScripts\DoW.sql" />
+    <None Remove="B020_StoredProcs\EmbeddedScripts\dbo.spListTables.sql" />
+    <None Remove="C030_Views\EmbeddedScripts\dbo.vwAllTables.sql" />
+    <None Remove="D040_Functions\EmbeddedScripts\dbo.DoW.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="B020_StoredProcs\EmbeddedScripts\dbo.spListColumns.sql" />
-    <EmbeddedResource Include="C030_Views\EmbeddedScripts\vwAllTables.sql" />
-    <EmbeddedResource Include="D040_Functions\EmbeddedScripts\DoW.sql" />
+    <EmbeddedResource Include="B020_StoredProcs\EmbeddedScripts\dbo.spListTables.sql" />
+    <EmbeddedResource Include="C030_Views\EmbeddedScripts\dbo.vwAllTables.sql" />
+    <EmbeddedResource Include="D040_Functions\EmbeddedScripts\dbo.DoW.sql" />
   </ItemGroup>
 
   <ItemGroup>

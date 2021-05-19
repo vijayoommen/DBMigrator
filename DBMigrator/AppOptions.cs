@@ -3,7 +3,7 @@ using CommandLine.Text;
 
 namespace DBMigrator
 {
-    internal class AppOptions
+    public class AppOptions
     {
         [Option(shortName:'r', longName:"rollback", Default = false, ResourceType = typeof(bool))]
         public bool Rollback { get; set; }
@@ -19,6 +19,5 @@ namespace DBMigrator
 
         [Option(shortName:'r', longName:"runMigration", Default = false, ResourceType = typeof(bool))]
         public bool RunMigration { get; set; }
-
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DBMigrator.A010_DBScripts
 {
-    [Migration(1002, TransactionBehavior.None)]
-    public class M0002_AddInitialDataToUserTable : Migration
+    [AppMigration(1002)]
+    public class M0002_AddInitialDataToUserTable : AppMigration
     {
         public override void Down()
         {

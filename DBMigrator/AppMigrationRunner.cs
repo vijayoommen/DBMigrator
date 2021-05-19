@@ -5,87 +5,80 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DBMigrator
 {
-    public class MigrationRunner
+    public class AppMigrationRunner
     {
-        internal static void MigrateUp(long version = 0)
+        private static IServiceProvider _appServiceProvider;
+        internal static IServiceProvider AppServiceProvider
+        {
+            get
+            {
+                if (_appServiceProvider == null)
+                    _appServiceProvider = CreateServices();
+                return _appServiceProvider;
+            }
+        }
+
+        public static AppOptions Options { get; private set; }
+        public static IServiceScope Scope { get; private set; }
+        public static IMigrationRunner MigrationRunner { get; private set; }
+        
+
+        internal static void MigrateUp(AppOptions options)
         {
             Console.WriteLine("********************Starting to migrate up...");
-            var serviceProvider = CreateServices();
-
-            // Put the database update into a scope to ensure
-            // that all resources will be disposed.
-            using (var scope = serviceProvider.CreateScope())
+            Options = options;
+            using (Scope = AppServiceProvider.CreateScope())
             {
-                // Instantiate the runner
-                var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-                using(var runnerScope = runner.BeginScope())
-                {
-                    try
-                    {
-                        if (version > 0)
-                            runner.MigrateUp(version);
-                        else
-                            runner.MigrateUp();
-
-                        runnerScope.Complete();
-                    }
-                    catch(Exception ex)
-                    {
-                        runnerScope.Cancel();
-                    }
-                }
+                MigrationRunner = Scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+                MigrationRunner.MigrateUp();
             }
         }
 
         internal static void ListMigrations()
         {
-            var serviceProvider = CreateServices();
+            Options = new AppOptions();
+            var serviceProvider = AppServiceProvider;
 
             // Put the database update into a scope to ensure
             // that all resources will be disposed.
-            using (var scope = serviceProvider.CreateScope())
+            using (Scope = serviceProvider.CreateScope())
             {
                 // Instantiate the runner
-                var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+                MigrationRunner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
                 // Execute the migrations
-                runner.ListMigrations();
+                MigrationRunner.ListMigrations();
             }
         }
 
-        internal static void Preview()
+        internal static void Preview(AppOptions options)
         {
-            var serviceProvider = CreateServices();
+            Console.WriteLine("**************** Starting preview mode...");
+            Options = options;
 
-            Console.WriteLine("*********** RUNNING IN PREVIEW MODE ONLY.");
-            using (var scope = serviceProvider.CreateScope())
+            using (Scope = AppServiceProvider.CreateScope())
             {
-                // Instantiate the runner
-                var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-                // begin a tranasction
-                using (var runnerScope = runner.BeginScope())
+                MigrationRunner = Scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+                using (var runnerScope = MigrationRunner.BeginScope())
                 {
                     try
                     {
-                        // Execute the migrations
-                        runner.MigrateUp();
+                        MigrationRunner.MigrateUp();
                     }
                     finally
                     {
-                        // cancel - and check to see if there are errors
                         runnerScope.Cancel();
                     }
                 }
             }
-            Console.WriteLine("*********** ALL CHANGES ROLLBACK.");
         }
 
-        internal static void MigrateDown(long version)
+        internal static void MigrateDown(AppOptions options)
         {
-            Console.WriteLine($"********Rollback initiated......{version}");
-            var serviceProvider = CreateServices();
+            Console.WriteLine($"********Rollback initiated......{options.Version}");
+            Options = options;
+            var version = Options.Version;
+            var serviceProvider = AppServiceProvider;
 
             // Put the database update into a scope to ensure
             // that all resources will be disposed.
@@ -116,14 +109,15 @@ namespace DBMigrator
                     .WithGlobalConnectionString(ConfigurationManager.ConnectionStrings["db"].ConnectionString)
                     // Define the assembly containing the migrations
                     .ScanIn(typeof(DBMigrator.Program).Assembly).For.All()
-                    .ConfigureGlobalProcessorOptions(options => { options.PreviewOnly = false;  })
-                    )
+                    .ConfigureGlobalProcessorOptions(options =>
+                    {
+                        options.PreviewOnly = false;
+                    })
+                )
                 // Enable logging to console in the FluentMigrator way
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 // Build the service provider
                 .BuildServiceProvider(false);
         }
-
     }
-
 }

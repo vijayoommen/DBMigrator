@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DBMigrator.C030_Views
 {
-    [Maintenance(MigrationStage.BeforeAll, TransactionBehavior.None)]
+    [AppMaintenance(MigrationStage.BeforeAll)]
     public class RunViews : Migration
     {
         public override void Down()
@@ -16,8 +16,17 @@ namespace DBMigrator.C030_Views
 
         public override void Up()
         {
-            var resources = Utilities.FindScripts(this.GetType().Namespace);
-            resources.ToList().ForEach(script => Execute.EmbeddedScript(script));
+            var resources = Helper.FindScripts(this.GetType().Namespace);
+            resources.ToList().ForEach(script => {
+                RunDropStatement(script);
+                Execute.EmbeddedScript(script);
+            });
+        }
+        private void RunDropStatement(string script)
+        {
+            var objectName = script.Replace($"{typeof(RunViews).Namespace}.EmbeddedScripts.", "").ToLower().Replace(".sql", "");
+            var sql = $@"drop view if exists {objectName}";
+            Execute.Sql(sql);
         }
     }
 }

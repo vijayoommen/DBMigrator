@@ -12,7 +12,7 @@ namespace DBMigrator
         static void Main(string[] args)
         {
             var command = string.Join(' ', args);
-            //command = "--list --runMigration";
+            //command = "--list --preview";
             parser = new Parser(settings => { 
                 settings.EnableDashDash = true; 
                 settings.CaseSensitive = false;  
@@ -37,22 +37,22 @@ namespace DBMigrator
         {
             if (options.List)
             {
-                MigrationRunner.ListMigrations();
+                AppMigrationRunner.ListMigrations();
             }
 
             if (options.Preview)
             {
-                MigrationRunner.Preview();
+                AppMigrationRunner.Preview(options);
             }
 
             if (options.Rollback && options.Version > 0)
             {
-                MigrationRunner.MigrateDown(options.Version);
+                AppMigrationRunner.MigrateDown(options);
             }
 
             if (options.RunMigration)
             {
-                MigrationRunner.MigrateUp(options.Version);
+                AppMigrationRunner.MigrateUp(options);
             }
             
         }
